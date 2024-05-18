@@ -1,0 +1,57 @@
+{% extends "book_outlet/base.html" %}
+
+{% block title %}Book Store - Home{% endblock %}
+
+{% block content %}
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Book Store</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h1>Welcome to the Book Store!</h1>
+
+        <h2>Featured Books</h2>
+
+        <ul>
+            {% for book in books %} 
+                <li>
+                    <strong>Title:</strong> {{ book.title }}
+                    <br>
+                    <strong>Author:</strong> {{ book.author }}
+                    <br>
+                    <strong>Rating:</strong> {{ book.rating }}
+                    <br>
+                    <strong>Best Selling:</strong> {{ book.is_bestselling }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <footer class="mt-4 py-3 bg-dark text-white">
+        <div class="container text-center">
+            &copy; 2022 Book Store. All rights reserved.
+        </div>
+    </footer>
+{% endblock %}
