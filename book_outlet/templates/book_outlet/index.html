@@ -37,7 +37,7 @@
         <ul>
             {% for book in books %} 
                 <li>
-                    <strong>Title:</strong> {{ book.title }}
+                    <a href="{{ book.get_absolute_url }}"><strong>Title:</strong> {{ book.title }}</a>
                     <br>
                     <strong>Author:</strong> {{ book.author }}
                     <br>
