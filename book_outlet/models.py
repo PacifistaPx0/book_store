@@ -16,14 +16,10 @@ class Book(models.Model):
     is_bestselling = models.BooleanField(default=False)
     # Harry Potter 1 => harry-potter-1
     slug = models.SlugField(default="", blank=True,
-                            null=False, editable=False, db_index=True)
+                            null=False, db_index=True)
 
     def get_absolute_url(self):
         return reverse("book-details", kwargs={"slug": self.slug})
-
-    def save(self, *args, **kwargs):  # overriding the save method
-        self.slug = slugify(self.title)
-        super().save(*args, *kwargs)  # making sure super save is called
 
     def __str__(self):  # / used to convert an object to a string for /admin/
         return f"{self.title} ({self.rating})"
