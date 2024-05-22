@@ -7,5 +7,7 @@ from .models import Book
 
 class BookAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)} #cant have both prepopulated and readonly field
+    list_filter = ("rating", "author",)
+    list_display = ("title", "author")
 
 admin.site.register(Book, BookAdmin)

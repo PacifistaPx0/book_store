@@ -12,7 +12,7 @@ class Book(models.Model):
     title = models.CharField(max_length=50)
     rating = models.IntegerField(
         validators=[MinValueValidator(1), MaxValueValidator(5)])
-    author = models.CharField(null=True, max_length=100)
+    author = models.ForeignKey("Author", on_delete=models.CASCADE)
     is_bestselling = models.BooleanField(default=False)
     # Harry Potter 1 => harry-potter-1
     slug = models.SlugField(default="", blank=True,
@@ -23,3 +23,8 @@ class Book(models.Model):
 
     def __str__(self):  # / used to convert an object to a string for /admin/
         return f"{self.title} ({self.rating})"
+
+
+class Author(models.Model):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
