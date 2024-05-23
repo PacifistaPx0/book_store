@@ -10,9 +10,10 @@ from django.utils.text import slugify
 # / creates a database table called books which has a title, rating etc columns
 class Book(models.Model):
     title = models.CharField(max_length=50)
-    rating = models.IntegerField(
-        validators=[MinValueValidator(1), MaxValueValidator(5)])
-    author = models.ForeignKey("Author", on_delete=models.CASCADE)
+    rating = models.DecimalField(max_digits=2, decimal_places=1, validators=[
+                                 MinValueValidator(1.0), MaxValueValidator(5.0)])
+    author = models.ForeignKey(
+        "Author", on_delete=models.CASCADE, null=True, related_name="books")
     is_bestselling = models.BooleanField(default=False)
     # Harry Potter 1 => harry-potter-1
     slug = models.SlugField(default="", blank=True,
@@ -28,3 +29,6 @@ class Book(models.Model):
 class Author(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
